@@ -1,0 +1,21 @@
+C:\Users\DBOLLAM\Desktop\XsdToJaxb
+
+
+
+xjc -d C:\Users\DBOLLAM\Desktop\XsdToJaxb -p C:\Users\DBOLLAM\Desktop\XsdToJaxb\Employee.xsd
+
+
+
+xjc XsdToJaxb -p Employee.xsd
+
+xjc -d C:\Users\DBOLLAM\Desktop\XsdToJaxb -p C:\Users\DBOLLAM\Desktop\XsdToJaxb\employee.xsd
+
+
+
+
+====C:\Users\DBOLLAM\Desktop\XsdToJaxb>xjc -d C:\Users\DBOLLAM\Desktop\XsdToJaxb\generatedemp -p com.bean employee.xsd
+
+
+-d --->place where we need generated the files
+
+-p --->xsd file located package
