@@ -1,0 +1,105 @@
+import { render, screen ,fireEvent} from '@testing-library/react';
+import renderer from "react-test-renderer"
+import App from './App';
+const sum=require("./sum");
+
+function showData(items,dispItem)
+{
+    for (var i=0;i<items.length;i++)
+    {
+        dispItem(items[i]);
+    }
+}
+
+
+/*dispItem(num)
+{
+  console.log
+}*/
+/*test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/Login/i);
+  expect(linkElement).toBeInTheDocument();
+});*/
+//----------- all calculator related test cases----
+ const tree =renderer.create(<App/>)
+describe("Test Suite For Testing Summation In calculator",
+()=>{
+    //---------------------
+    beforeAll(()=>{
+        console.log(" Excecuded before all test cases");
+    })
+
+    //-----------------------------
+    beforeEach(()=>{
+        console.log(" Excecuded before each test cases");
+    })
+
+    //---------1---------------
+    test("Test 2+3 =5 ",()=>{
+        expect((2+3)).toBe(5)
+    })
+    //-----------------
+    it("Test sum function to do summation of 5+5=10",()=>{
+        expect(sum(5,5)).toBe(10);
+    })
+    //--------------------------
+    it("Test multiply function fpr 10*0=0",()=>{
+        expect((10*0)).toEqual(0)
+    })
+    //-----------------------
+    afterEach(()=>{
+        console.log(" Excecuded after each test cases");
+    })
+    //---------------------------
+    afterAll(()=>{
+        console.log(" Excecuded after all test cases");
+    })
+});
+
+//-------2 suite--------------------------
+describe(" Test Suite 2 to Test App.js Functionality",
+()=>{
+    //------------------------
+         it(" Test App Comp  is rendered propply",()=>{
+            expect(tree).toMatchSnapshot();
+     })
+     //---------------------------
+     it(" Test App has h2 tag with dataid attribute",()=>{
+        const {getByTestId}   = render(<App/>);
+        expect(getByTestId("h2Id")).
+        toHaveTextContent("Welcome To CG")
+     })
+     //------------------------------------
+     it("Test App has Button with backf=ground color red",
+    ()=>{
+      render(<App/>);        
+            const greenColorBtn=
+            screen.getByRole("button",{name:"Change To blue"});
+            expect(greenColorBtn).
+            toHaveStyle({backgroundColor:"red"});
+    })
+    //--------------------------------
+    it("Test Button Turns Blue when click",()=>{
+           render(<App/>)
+        const  colorBtn= 
+        screen.getByRole("button",{name:"Change To blue"});
+        fireEvent.click(colorBtn);
+        expect(colorBtn).toHaveStyle({backgroundColor:"blue"});
+        expect(colorBtn.textContent).toBe("Change To red");
+    })
+
+});
+
+//------------mock testing---
+
+describe(" Test suite for mock api",()=>{
+   it("Test  mock for dispItem function",()=>{
+        const mockOfDispItem=jest.fn((x)=>{ return (x+42)});
+        showData([40,20,10,90],mockOfDispItem); 
+        //expect(mockOfDispItem.mock.calls.length).toBe(4);
+        //expect(mockOfDispItem.mock.calls[1][0]).toBe(20);
+        expect (mockOfDispItem.mock.results[1].value).toBe(62)
+
+   });
+});
